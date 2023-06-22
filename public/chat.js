@@ -6,8 +6,13 @@ var output = document.querySelector('#output');
 var send = document.querySelector('#send');
 
 send.addEventListener('click', function(){
-    socket.emit('sendingMessage ',{
+    socket.emit('sendingMessage', {
         message: message.value,
         username: username.value
     });
+    console.log('Sending');
+});
+
+socket.on('broadcastMessage', function (data) {
+    output.innerHTML += '<p><strong>' + data.username + ':</strong> ' + data.message + '</p><hr>';
 });
